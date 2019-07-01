@@ -83,7 +83,7 @@
                     echo "<td>".$registrant['age']."</td>";
                     echo "<td>".$registrant['email']."</td>";
                     echo "<td>".$registrant['job']."</td>";
-                    echo "<td>".$registrant['date']."</td>";
+                    echo "<td>".$registrant['gender']."</td>";
                     echo "<td>".$registrant['date']."</td></tr>";
                 }
                 echo "</table>";
