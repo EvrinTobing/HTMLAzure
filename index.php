@@ -51,15 +51,18 @@ value="male">Male</br></br>
             $age = $_POST['age'];
             $email = $_POST['email'];
             $job = $_POST['job'];
+            $gender = $_POST['gender'];
             $date = date("Y-m-d");
             // Insert data
-            $sql_insert = "INSERT INTO Registration (name, email, job, date) 
+            $sql_insert = "INSERT INTO Registration (name, age, email, job, gender, date) 
                         VALUES (?,?,?,?)";
             $stmt = $conn->prepare($sql_insert);
             $stmt->bindValue(1, $name);
-            $stmt->bindValue(2, $email);
-            $stmt->bindValue(3, $job);
-            $stmt->bindValue(4, $date);
+            $stmt->bindValue(2,$age);
+            $stmt->bindValue(3, $email);
+            $stmt->bindValue(4, $job);
+            $stmt->bindValue(5,$gender);
+            $stmt->bindValue(6, $date);
             $stmt->execute();
         } catch(Exception $e) {
             echo "Failed: " . $e;
@@ -75,13 +78,17 @@ value="male">Male</br></br>
                 echo "<h2>People who are registered:</h2>";
                 echo "<table>";
                 echo "<tr><th>Name</th>";
+                echo "<th>Age</th>";
                 echo "<th>Email</th>";
                 echo "<th>Job</th>";
+                echo "<th>Gender</th>";
                 echo "<th>Date</th></tr>";
                 foreach($registrants as $registrant) {
                     echo "<tr><td>".$registrant['name']."</td>";
+                    echo "<td>".$registrant['age']."</td>";
                     echo "<td>".$registrant['email']."</td>";
                     echo "<td>".$registrant['job']."</td>";
+                    echo "<td>".$registrant['gender']."</td>";
                     echo "<td>".$registrant['date']."</td></tr>";
                 }
                 echo "</table>";
