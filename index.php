@@ -19,11 +19,11 @@
  <h1>Register here!</h1>
  <p>Fill in your name and email address, then click <strong>Submit</strong> to register.</p>
  <form method="post" action="index.php" enctype="multipart/form-data" >
-       Name  <input type="text" name="name" id="name"/></br></br>
-       Age  <input type="int" name="age" id="age"/></br></br>
+       Name:  <input type="text" name="name" id="name"/></br></br>
+       Age:  <input type="int" name="age" id="age"/></br></br>
               Email <input type="text" name="email" id="email"/></br></br>
-       Job <input type="text" name="job" id="job"/></br></br>
-       Gender <input type="radio" name="gender" value="female">Female
+       Job: <input type="text" name="job" id="job"/></br></br>
+       Gender: <input type="radio" name="gender" value="female">Female
             <input type="radio" name="gender"value="male">Male</br></br>
        <input type="submit" name="submit" value="Submit" />
        <input type="submit" name="load_data" value="Load Data" />
@@ -50,7 +50,7 @@
             $gender = $_POST['gender'];
             $date = date("Y-m-d");
             // Insert data
-            $sql_insert = "INSERT INTO Registration (name, age, email, job, gender, date) VALUES (?,?,?,?,?,?)";
+            $sql_insert = "INSERT INTO Registration (name, age, email, job, gender, date) VALUES (?,?,?,?,?,?,?)";
             $stmt = $conn->prepare($sql_insert);
             $stmt->bindValue(1, $name);
             $stmt->bindValue(2,$age);
