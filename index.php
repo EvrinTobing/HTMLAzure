@@ -19,13 +19,14 @@
  <h1>Register here!</h1>
  <p>Fill in your name and email address, then click <strong>Submit</strong> to register.</p>
  <form method="post" action="index.php" enctype="multipart/form-data" >
-       Name:  <input type="text" name="name" id="name"/></br></br>
-       Age:  <input type="int" name="age" id="age"/></br></br>
+       Name  <input type="text" name="name" id="name"/></br></br>
+       Age  <input type="int" name="age" id="age"/></br></br>
               Email <input type="text" name="email" id="email"/></br></br>
-       Job: <input type="text" name="job" id="job"/></br></br>
-       Gender: <input type="radio" name="gender" id="gender" value="female">Female
-            <input type="radio" name="gender" id= "gender" value="male">Male</br></br>
-       <input type="submit" name="submit" value="Submit" />
+       Job <input type="text" name="job" id="job"/></br></br>
+       Gender  <select name="Gender">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            </select>
        <input type="submit" name="load_data" value="Load Data" />
  </form>
  <?php
@@ -47,13 +48,7 @@
             $age = $_POST['age'];
             $email = $_POST['email'];
             $job = $_POST['job'];
-            // $gender = $_POST['gender'];
-            if(isset($_POST['gender'])=='male'){
-                'gender' == 'male';
-            }
-            if(isset($_POST['gender'])=='female'){
-                'gender' == 'female';
-            }
+            $gender = $_POST['gender'];
             $date = date("Y-m-d");
             // Insert data
             $sql_insert = "INSERT INTO Registration (name, age, email, job, gender, date) VALUES (?,?,?,?,?,?)";
@@ -76,7 +71,7 @@
             $stmt = $conn->query($sql_select);
             $registrants = $stmt->fetchAll(); 
             if(count($registrants) > 0) {
-                echo "<h2>People who are registered:</ah2>";
+                echo "<h2>People who are registered:</h2>";
                 echo "<table>";
                 echo "<tr><th>Name</th>";
                 echo "<th>Age</th>";
