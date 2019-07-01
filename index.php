@@ -23,8 +23,8 @@
        Age:  <input type="int" name="age" id="age"/></br></br>
               Email <input type="text" name="email" id="email"/></br></br>
        Job: <input type="text" name="job" id="job"/></br></br>
-       Gender: <input type="radio" name="gender" value="female">Female
-            <input type="radio" name="gender"value="male">Male</br></br>
+       Gender: <input type="radio" name="gender" id="gender" value="female">Female
+            <input type="radio" name="gender" id= "gender" value="male">Male</br></br>
        <input type="submit" name="submit" value="Submit" />
        <input type="submit" name="load_data" value="Load Data" />
  </form>
@@ -47,10 +47,16 @@
             $age = $_POST['age'];
             $email = $_POST['email'];
             $job = $_POST['job'];
-            $gender = $_POST['gender'];
+            // $gender = $_POST['gender'];
+            if(isset($_POST['gender'])=='male'){
+                'gender' == 'male';
+            }
+            if(isset($_POST['gender'])=='female'){
+                'gender' == 'female';
+            }
             $date = date("Y-m-d");
             // Insert data
-            $sql_insert = "INSERT INTO Registration (name, age, email, job, gender, date) VALUES (?,?,?,?,?,?,?)";
+            $sql_insert = "INSERT INTO Registration (name, age, email, job, gender, date) VALUES (?,?,?,?,?,?)";
             $stmt = $conn->prepare($sql_insert);
             $stmt->bindValue(1, $name);
             $stmt->bindValue(2,$age);
