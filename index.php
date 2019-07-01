@@ -23,10 +23,8 @@
        Age  <input type="int" name="age" id="age"/></br></br>
               Email <input type="text" name="email" id="email"/></br></br>
        Job <input type="text" name="job" id="job"/></br></br>
-       Gender  <select name="Gender">
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                            </select></br></br>
+       Gender  <input type="radio" name="gender" value="Male"/>Male
+       <input type="radio" name="gender" value="Female"/>Female
       </br></br> <input type="submit" name="submit" value="Submit" />
        <input type="submit" name="load_data" value="Load Data" />
  </form>
