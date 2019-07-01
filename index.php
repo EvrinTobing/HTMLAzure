@@ -1,6 +1,6 @@
-﻿<html>
+<html>
  <head>
- <Title>Web Dating Registration Form</Title>
+ <Title>Registration Form</Title>
  <style type="text/css">
  	body { background-color: #fff; border-top: solid 10px #000;
  	    color: #333; font-size: .85em; margin: 20; padding: 20;
@@ -19,63 +19,62 @@
  <h1>Register here!</h1>
  <p>Fill in your name and email address, then click <strong>Submit</strong> to register.</p>
  <form method="post" action="index.php" enctype="multipart/form-data" >
-       Nama  <input type="text" name="nama" id="nama"/></br></br>
-       Umur <input type="int" name="umur" id="umur"/></br></br>
+       Name  <input type="text" name="name" id="name"/></br></br>
        Email <input type="text" name="email" id="email"/></br></br>
-       Jenis Kelamin <input type="text" name="j_kelamin" id="j_kelamin"/></br></br>
-       
+       Job <input type="text" name="job" id="job"/></br></br>
        <input type="submit" name="submit" value="Submit" />
        <input type="submit" name="load_data" value="Load Data" />
  </form>
  <?php
-    $host = "dicodingservers";
-    $user = "evrin";
-    $pass = "asdewq123";
-    try {
-        $conn = new PDO("sqlsrv:server = $host; Database = dcodedb", $user, $pass);
-        $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-        echo "connected succesfully";
-    } catch(PDOException $e) {
+    $host = "<Nama server database Anda>";
+    $user = "<Nama admin database Anda>";
+    $pass = "<Password admin database Anda>";
+    $db = "<Nama database Anda>";
 
-        echo "Failed: " . $e->getMessage();
+    try {
+        $conn = new PDO("sqlsrv:server = $host; Database = $db", $user, $pass);
+        $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+    } catch(Exception $e) {
+        echo "Failed: " . $e;
     }
+
     if (isset($_POST['submit'])) {
         try {
-            $nama = $_POST['nama'];
-            $umur = $_POST['umur'];
+            $name = $_POST['name'];
             $email = $_POST['email'];
-            $jk = $_POST['j_kelamin'];
+            $job = $_POST['job'];
+            $date = date("Y-m-d");
             // Insert data
-            $sql_insert = "INSERT INTO Dating (nama, umur, email, j_kelamin) 
+            $sql_insert = "INSERT INTO Registration (name, email, job, date) 
                         VALUES (?,?,?,?)";
             $stmt = $conn->prepare($sql_insert);
-            $stmt->bindValue(1, $nama);
-            $stmt->bindValue(2, $umur);
-            $stmt->bindValue(3, $email);
-            $stmt->bindValue(4, $jk);
+            $stmt->bindValue(1, $name);
+            $stmt->bindValue(2, $email);
+            $stmt->bindValue(3, $job);
+            $stmt->bindValue(4, $date);
             $stmt->execute();
         } catch(Exception $e) {
             echo "Failed: " . $e;
         }
+
         echo "<h3>Your're registered!</h3>";
     } else if (isset($_POST['load_data'])) {
         try {
-            $sql_select = "SELECT * FROM Dating";
+            $sql_select = "SELECT * FROM Registration";
             $stmt = $conn->query($sql_select);
             $registrants = $stmt->fetchAll(); 
             if(count($registrants) > 0) {
                 echo "<h2>People who are registered:</h2>";
                 echo "<table>";
-                echo "<tr><th>Nama</th>";
-                echo "<th>Umur</th>";
-                echo "<th>E-mail</th></tr>";
-                echo "<th>Jenis Kelamin</th>";
-               
+                echo "<tr><th>Name</th>";
+                echo "<th>Email</th>";
+                echo "<th>Job</th>";
+                echo "<th>Date</th></tr>";
                 foreach($registrants as $registrant) {
-                    echo "<tr><td>".$registrant['nama']."</td>";
-                    echo "<td>".$registrant['umur']."</td>";
+                    echo "<tr><td>".$registrant['name']."</td>";
                     echo "<td>".$registrant['email']."</td>";
-                    echo "<td>".$registrant['jk']."</td></tr>";
+                    echo "<td>".$registrant['job']."</td>";
+                    echo "<td>".$registrant['date']."</td></tr>";
                 }
                 echo "</table>";
             } else {
@@ -87,4 +86,4 @@
     }
  ?>
  </body>
-</html>
+ </html>
