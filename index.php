@@ -23,12 +23,8 @@
        Age  <input type="int" name="age" id="age"/></br></br>
               Email <input type="text" name="email" id="email"/></br></br>
        Job <input type="text" name="job" id="job"/></br></br>
-       Gender <input type="radio" name="gender"
-<?php if (isset($gender) && $gender=="female") echo "checked";?>
-value="female">Female
-<input type="radio" name="gender"
-<?php if (isset($gender) && $gender=="male") echo "checked";?>
-value="male">Male</br></br>
+       Gender <input type="radio" name="gender" value="female">Female
+            <input type="radio" name="gender"value="male">Male</br></br>
        <input type="submit" name="submit" value="Submit" />
        <input type="submit" name="load_data" value="Load Data" />
  </form>
@@ -54,8 +50,7 @@ value="male">Male</br></br>
             $gender = $_POST['gender'];
             $date = date("Y-m-d");
             // Insert data
-            $sql_insert = "INSERT INTO Registration (name, age, email, job, gender, date) 
-                        VALUES (?,?,?,?,?,?)";
+            $sql_insert = "INSERT INTO Registration (name, age, email, job, gender, date) VALUES (?,?,?,?,?,?)";
             $stmt = $conn->prepare($sql_insert);
             $stmt->bindValue(1, $name);
             $stmt->bindValue(2,$age);
@@ -75,7 +70,7 @@ value="male">Male</br></br>
             $stmt = $conn->query($sql_select);
             $registrants = $stmt->fetchAll(); 
             if(count($registrants) > 0) {
-                echo "<h2>People who are registered:</h2>";
+                echo "<h2>People who are registered:</ah2>";
                 echo "<table>";
                 echo "<tr><th>Name</th>";
                 echo "<th>Age</th>";
@@ -88,7 +83,7 @@ value="male">Male</br></br>
                     echo "<td>".$registrant['age']."</td>";
                     echo "<td>".$registrant['email']."</td>";
                     echo "<td>".$registrant['job']."</td>";
-                    echo "<td>".$registrant['gender']."</td>";
+                    echo "<td>".$registrant['date']."</td>";
                     echo "<td>".$registrant['date']."</td></tr>";
                 }
                 echo "</table>";
