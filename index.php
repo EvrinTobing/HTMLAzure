@@ -1,6 +1,6 @@
 <html>
  <head>
- <Title>Registration Form</Title>
+ <Title>Web Dating Registration Form</Title>
  <style type="text/css">
  	body { background-color: #fff; border-top: solid 10px #000;
  	    color: #333; font-size: .85em; margin: 20; padding: 20;
@@ -20,6 +20,13 @@
  <p>Fill in your name and email address, then click <strong>Submit</strong> to register.</p>
  <form method="post" action="index.php" enctype="multipart/form-data" >
        Name  <input type="text" name="name" id="name"/></br></br>
+       Age  <input type="int" name="age" id="age"/></br></br>
+       Gender <input type="radio" name="gender"
+<?php if (isset($gender) && $gender=="female") echo "checked";?>
+value="female">Female
+<input type="radio" name="gender"
+<?php if (isset($gender) && $gender=="male") echo "checked";?>
+value="male">Male
        Email <input type="text" name="email" id="email"/></br></br>
        Job <input type="text" name="job" id="job"/></br></br>
        <input type="submit" name="submit" value="Submit" />
@@ -41,6 +48,7 @@
     if (isset($_POST['submit'])) {
         try {
             $name = $_POST['name'];
+            $age = $_POST['age'];
             $email = $_POST['email'];
             $job = $_POST['job'];
             $date = date("Y-m-d");
