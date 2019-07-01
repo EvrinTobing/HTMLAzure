@@ -26,7 +26,7 @@
 value="female">Female
 <input type="radio" name="gender"
 <?php if (isset($gender) && $gender=="male") echo "checked";?>
-value="male">Male
+value="male">Male</br>
        Email <input type="text" name="email" id="email"/></br></br>
        Job <input type="text" name="job" id="job"/></br></br>
        <input type="submit" name="submit" value="Submit" />
