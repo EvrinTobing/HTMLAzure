@@ -28,15 +28,16 @@
        <input type="submit" name="load_data" value="Load Data" />
  </form>
  <?php
-    $host = "dicodingservers.database.windows.net";
+    $host = "dicodingservers";
     $user = "evrin";
     $pass = "asdewq123";
-    $db = "dcodedb";
     try {
-        $conn = new PDO("sqlsrv:server = $host; Database = $db", $user, $pass);
+        $conn = new PDO("sqlsrv:server = $host; Database = dcodedb", $user, $pass);
         $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-    } catch(Exception $e) {
-        echo "Failed: " . $e;
+        echo "connected succesfully";
+    } catch(PDOException $e) {
+
+        echo "Failed: " . $e->getMessage();
     }
     if (isset($_POST['submit'])) {
         try {
